@@ -1,0 +1,75 @@
+---
+# Requirement
+# - swarm with docker flow proxy
+# - elasticsearch stack
+# - mongodb stack
+version: '3.4'
+services:
+  graylog:
+    image: graylog2/server:2.4.5-1
+    ports:
+      - 9000:9000
+    configs:
+#      - source: graylog2.conf
+#        target: /usr/share/graylog/data/config/graylog.conf
+      # use override one
+      - source: docker-entrypoint.sh
+        target: /docker-entrypoint.sh
+        mode: 0755
+    environment:
+      TZ: Asia/Seoul
+      GRAYLOG_ROOT_TIMEZONE: "Asia/Seoul"
+      GRAYLOG_IS_MASTER: "true"
+      # GRAYLOG_SERVER_JAVA_OPTS: -Xms4g -Xms4g
+      # CHANGE ME! 
+      # Use pwgen -N 1 -s 48
+      GRAYLOG_PASSWORD_SECRET: "HalWOabaZewE6O4YuHo63wvLP9cBqCmUDV9SMTQ8uTuiCtsl"
+      # Password: admin
+      GRAYLOG_ROOT_PASSWORD_SHA2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+      #- GRAYLOG_ELASTICSEARCH_CLUSTER_NAME=prod_es_cluster
+      GRAYLOG_ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
+      #- GRAYLOG_WEB_ENDPOINT_URI=http://10.161.135.120:9000/api
+      GRAYLOG_WEB_ENDPOINT_URI: "http://10.161.64.68:9000/api"
+      #GRAYLOG_REST_TRANSPORT_URI: "http://10.161.64.68:9000/api"
+      #GRAYLOG_WEB_ENDPOINT_URI: "http://10.161.64.68/graylog/"
+      #GRAYLOG_REST_TRANSPORT_URI: "http://10.161.64.68/graylog/api"
+      MAXMIND_DOWNLOAD_URL: "http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz"
+      GRAYLOG_MONGODB_URI: "mongodb://10.0.1.64:27017,10.0.1.63:27017,10.0.1.65:27017/graylog"
+    networks:
+      - elasticsearch
+      - graylog2
+      - mongo
+      - proxy
+    deploy:
+      resources:
+        limits:
+          memory: 3G
+        reservations:
+          cpus: '0.50'
+          memory: 2G 
+      placement:
+        constraints: [ node.role == manager ]
+      # For Docker flow proxy
+      labels:
+        com.df.notify: "true"
+        com.df.servicePath: "/graylog"
+        com.df.port: 9000
+        # https://github.com/docker-flow/docker-flow-proxy/blob/master/docs/usage.md
+        # http://docs.graylog.org/en/latest/pages/configuration/web_interface.html
+        com.df.setReqHeader: "X-Graylog-Server-URL http://10.161.64.68/graylog"
+configs:
+  docker-entrypoint.sh:
+    file: ./graylog2-docker-entrypoint.sh
+  graylog2.conf:
+    file: ./graylog2.conf
+networks:
+  graylog2:
+  mongo:
+    external:
+      name: ${MONGODB_NETWORK_NAME:-mongo}
+  elasticsearch:
+    external:
+      name: ${ELASTICSEARCH_NETWORK_NAME:-elasticsearch}
+  proxy:
+    external:
+      name: ${PROXY_NETWORK_NAME:-proxy}
