@@ -19,6 +19,8 @@ services:
     environment:
       TZ: Asia/Seoul
       GRAYLOG_ROOT_TIMEZONE: "Asia/Seoul"
+      # IT System Operation Team
+      GRAYLOG_ROOT_EMAIL: "ne00001057@nhnent.com"
       GRAYLOG_IS_MASTER: "true"
       # GRAYLOG_SERVER_JAVA_OPTS: -Xms4g -Xms4g
       # CHANGE ME! 
