@@ -22,7 +22,7 @@ if [ "$1" = 'graylog' -a "$(id -u)" = '0' ]; then
   done
 
   # Download MaxMind GeoLite2-City database
-  if [ -n ${MAXMIND_DOWNLOAD_URL} ];then
+  if [ ! "x${MAXMIND_DOWNLOAD_URL}" = "x" ];then
     wget -q -O /tmp/GeoLite2-City.tar.gz $MAXMIND_DOWNLOAD_URL
     [ -f /etc/graylog/server ] || mkdir -p /etc/graylog/server/
     tar zxf /tmp/GeoLite2-City.tar.gz --strip-components=1 \
