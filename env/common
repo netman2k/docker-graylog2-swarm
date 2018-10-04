@@ -1,0 +1,12 @@
+# Common environment
+IMAGE="graylog2/server:2.4.6-1"
+CONFIG_NAME="graylog-docker-entrypoint.sh"
+NETWORK_NAME_ELASTICSEARCH="elasticsearch"
+NETWORK_NAME_MONGO="mongos"
+NETWORK_NAME_PROXY="proxy"
+NETWORK_NAME_GRAYLOG="graylog"
+MONGODB_URI="mongodb://mongos1:27017,mongos2:27017/graylog"
+ELASTICSEARCH_URL="http://elasticsearch:9200"
+MAXMIND_DOWNLOAD_URL="http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz"
+GRAYLOG_PASSWORD_SECRET="HalWOabaZewE6O4YuHo63wvLP9cBqCmUDV9SMTQ8uTuiCtsl"
+GRAYLOG_ROOT_PASSWORD_SHA2="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"

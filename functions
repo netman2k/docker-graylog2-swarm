@@ -1,0 +1,40 @@
+#!/bin/bash
+
+function create_network(){
+  # Create an overlay network for graylog cluster
+  local -r network=$(docker network ls -f "name=${NETWORK_NAME_GRAYLOG}" -q)
+  if [ "x${network}" = "x" ];then 
+    docker network create -d overlay --attachable "${NETWORK_NAME_GRAYLOG}"
+    [ "$?" -eq "0" ] || { echo -e "\nUnable to create an overlay network, ${NETWORK_NAME_GRAYLOG}\n" 1>&2; cleanup ; exit 1; }
+  fi
+}
+
+function cleanup(){
+  local id=$(docker service ls -f 'name=graylog2-master' -q)
+  if [ ! "x${id}" = "x" ];then 
+    docker service rm graylog2-master &> /dev/null
+  fi
+  local network=$(docker network ls -f "name=${NETWORK_NAME_GRAYLOG}" -q)
+  if [ ! "x${network}" = "x" ];then 
+    docker network rm $NETWORK_NAME_GRAYLOG &> /dev/null
+  fi
+  local -r config=$(docker config ls -f "name=${CONFIG_NAME}" -q)
+  if [ ! "x${config}" = "x" ];then 
+    docker config rm ${CONFIG_NAME} &> /dev/null
+  fi
+}
+
+function create_config(){
+  # Create Configs
+  local -r config=$(docker config ls -f "name=${CONFIG_NAME}" -q)
+  
+  # Delete first
+  if [ ! "x${config}" = "x" ];then 
+    docker config rm $config
+    sleep 1
+  fi
+  docker config create $CONFIG_NAME $DIR/graylog2-docker-entrypoint.sh
+  [ "$?" -eq "0" ] || { echo -e "\nUnable to create a config, ${CONFIG_NAME}\n" 1>&2; cleanup ; exit 1; }
+
+}
+
