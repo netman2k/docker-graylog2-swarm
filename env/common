@@ -1,6 +1,7 @@
 # Common environment
 IMAGE="graylog2/server:2.4.6-1"
 CONFIG_NAME="graylog-docker-entrypoint.sh"
+CONFIG_NAME2="metrics-reporter-prometheus-1.5.0.jar"
 NETWORK_NAME_ELASTICSEARCH="elasticsearch"
 NETWORK_NAME_MONGO="mongos"
 NETWORK_NAME_PROXY="proxy"

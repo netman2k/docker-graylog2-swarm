@@ -103,6 +103,8 @@ configs:
     file: ./graylog2-docker-entrypoint.sh
   graylog2.conf:
     file: ./graylog2.conf
+  metrics-reporter-prometheus:
+    file: ./plugins/metrics-reporter-prometheus-1.5.0.jar
 networks:
   graylog2:
   mongo:

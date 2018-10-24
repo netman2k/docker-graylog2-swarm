@@ -27,6 +27,7 @@ function cleanup(){
 function create_config(){
   # Create Configs
   local -r config=$(docker config ls -f "name=${CONFIG_NAME}" -q)
+  local -r config2=$(docker config ls -f "name=${CONFIG_NAME2}" -q)
   
   # Delete first
   if [ ! "x${config}" = "x" ];then 
@@ -36,5 +37,12 @@ function create_config(){
   docker config create $CONFIG_NAME $DIR/graylog2-docker-entrypoint.sh
   [ "$?" -eq "0" ] || { echo -e "\nUnable to create a config, ${CONFIG_NAME}\n" 1>&2; cleanup ; exit 1; }
 
+
+  if [ ! "x${config2}" = "x" ];then 
+    docker config rm $config2
+    sleep 1
+  fi
+  docker config create $CONFIG_NAME2 $DIR/plugins/metrics-reporter-prometheus-1.5.0.jar
+  [ "$?" -eq "0" ] || { echo -e "\nUnable to create a config, ${CONFIG_NAME2}\n" 1>&2; cleanup ; exit 1; }
 }
 

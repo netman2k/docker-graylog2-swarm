@@ -16,6 +16,7 @@ function create_service(){
   if [ "x${id}" = "x" ];then 
     docker service create --name graylog2-master \
       --config "source=${CONFIG_NAME},target=/docker-entrypoint.sh,mode=0755" \
+      --config "source=${CONFIG_NAME2},target=/usr/share/graylog/plugin/metrics-reporter-prometheus-1.5.0.jar,mode=0664" \
       --env "TZ=Asia/Seoul" \
       --env "GRAYLOG_ROOT_TIMEZONE=Asia/Seoul" \
       --env "GRAYLOG_IS_MASTER=${IS_MASTER}" \
