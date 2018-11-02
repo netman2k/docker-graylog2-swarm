@@ -107,7 +107,7 @@ cat <<EOF > ./data.json
 EOF
 
 # Request updating
-result=$(curl -s -u admin:admin -X PUT -H 'Content-Type: application/json' $GRAYLOG_HOST/api/system/indices/index_sets/$id -d @./data.json)
+result=$(curl -s -u $GRAYLOG_USER:$GRAYLOG_PASSWORD -X PUT -H 'Content-Type: application/json' $GRAYLOG_HOST/api/system/indices/index_sets/$id -d @./data.json)
 
 # Print result
 echo $result | jq .
