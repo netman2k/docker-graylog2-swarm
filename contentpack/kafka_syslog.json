@@ -465,6 +465,105 @@
   "outputs": [],
   "dashboards": [
     {
+      "title": "iptables packet dropped",
+      "description": "iptables Packet Dropped",
+      "dashboard_widgets": [
+        {
+          "description": "Target Host",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "source",
+            "show_pie_chart": false,
+            "query": "message:\"iptables Packet Dropped\"",
+            "show_data_table": true
+          },
+          "col": 2,
+          "row": 2,
+          "height": 0,
+          "width": 0
+        },
+        {
+          "description": "iptables_src",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "iptables_src",
+            "show_pie_chart": false,
+            "query": "message:\"iptables Packet Dropped\"",
+            "show_data_table": true
+          },
+          "col": 2,
+          "row": 4,
+          "height": 0,
+          "width": 0
+        },
+        {
+          "description": "iptables_dport",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "iptables_dport",
+            "show_pie_chart": false,
+            "query": "message:\"iptables Packet Dropped\"",
+            "show_data_table": true
+          },
+          "col": 1,
+          "row": 4,
+          "height": 0,
+          "width": 0
+        },
+        {
+          "description": "iptables_dst",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "iptables_dst",
+            "show_pie_chart": false,
+            "query": "message:\"iptables Packet Dropped\"",
+            "show_data_table": true
+          },
+          "col": 1,
+          "row": 2,
+          "height": 0,
+          "width": 0
+        },
+        {
+          "description": "iptables Packet Dropped",
+          "type": "SEARCH_RESULT_CHART",
+          "cache_time": 10,
+          "configuration": {
+            "interval": "hour",
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "query": "message:\"iptables Packet Dropped\""
+          },
+          "col": 1,
+          "row": 1,
+          "height": 0,
+          "width": 0
+        }
+      ]
+    },
+    {
       "title": "Package Management",
       "description": "Package Management",
       "dashboard_widgets": [
@@ -627,9 +726,9 @@
             "show_data_table": true
           },
           "col": 2,
-          "row": 9,
-          "height": 0,
-          "width": 0
+          "row": 6,
+          "height": 2,
+          "width": 1
         },
         {
           "description": "ssh_login_username",
@@ -645,48 +744,10 @@
             "query": "message:\" Accepted publickey for \" OR message:\" Accepted password for \"",
             "show_data_table": true
           },
-          "col": 1,
-          "row": 6,
-          "height": 0,
-          "width": 0
-        },
-        {
-          "description": "Fail2ban Unban",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "Generic_IP1",
-            "show_pie_chart": false,
-            "query": "application_name:fail2ban.actions AND message:\"NOTICE [sshd] Unban\"",
-            "show_data_table": true
-          },
-          "col": 2,
+          "col": 3,
           "row": 5,
-          "height": 0,
-          "width": 0
-        },
-        {
-          "description": "Fail2ban Ban",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "Generic_IP1",
-            "show_pie_chart": false,
-            "query": "application_name:fail2ban.actions AND message:\"NOTICE [sshd] Ban\"",
-            "show_data_table": true
-          },
-          "col": 2,
-          "row": 3,
-          "height": 0,
-          "width": 0
+          "height": 2,
+          "width": 1
         },
         {
           "description": "SSH Failure count",
@@ -703,8 +764,8 @@
           },
           "col": 1,
           "row": 1,
-          "height": 0,
-          "width": 0
+          "height": 1,
+          "width": 1
         },
         {
           "description": "SSH Login failures",
@@ -720,8 +781,8 @@
           },
           "col": 2,
           "row": 1,
-          "height": 0,
-          "width": 0
+          "height": 1,
+          "width": 2
         },
         {
           "description": "SSH login failed server",
@@ -732,15 +793,15 @@
               "type": "relative",
               "range": 86400
             },
-            "field": "source",
+            "field": "syslog_hostname",
             "show_pie_chart": false,
             "query": "message:\" Failed publickey for \" OR message:\" Failed password for \" OR (message:\"Invalid user\" AND message:from)",
             "show_data_table": true
           },
-          "col": 1,
-          "row": 4,
-          "height": 0,
-          "width": 0
+          "col": 2,
+          "row": 3,
+          "height": 2,
+          "width": 1
         },
         {
           "description": "Failed SSHD Metrics",
@@ -756,10 +817,10 @@
             "query": "application_name:sshd AND (message:\"Failed\" OR message:\"Invalid user\")",
             "show_data_table": true
           },
-          "col": 1,
-          "row": 8,
-          "height": 0,
-          "width": 0
+          "col": 3,
+          "row": 3,
+          "height": 2,
+          "width": 1
         },
         {
           "description": "SSH Login Failed Source IP",
@@ -770,15 +831,15 @@
               "type": "relative",
               "range": 86400
             },
-            "field": "Generic_IP1",
+            "field": "IPV4",
             "show_pie_chart": false,
             "query": "message:\" Failed publickey for \" OR message:\" Failed password for \" OR (message:\"Invalid user\" AND message:from)",
             "show_data_table": true
           },
           "col": 1,
           "row": 2,
-          "height": 0,
-          "width": 0
+          "height": 3,
+          "width": 1
         },
         {
           "description": "Root Login",
@@ -789,15 +850,15 @@
               "type": "relative",
               "range": 86400
             },
-            "field": "Generic_IP1",
+            "field": "IPV4",
             "show_pie_chart": false,
             "query": "message:\" Accepted publickey for root \" OR message:\" Accepted password for root \"",
             "show_data_table": true
           },
-          "col": 2,
-          "row": 7,
-          "height": 0,
-          "width": 0
+          "col": 1,
+          "row": 5,
+          "height": 2,
+          "width": 1
         },
         {
           "description": "SSH Connection Dropped",
@@ -813,107 +874,8 @@
           },
           "col": 2,
           "row": 2,
-          "height": 0,
-          "width": 0
-        }
-      ]
-    },
-    {
-      "title": "iptables packet dropped",
-      "description": "iptables Packet Dropped",
-      "dashboard_widgets": [
-        {
-          "description": "Target Host",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "source",
-            "show_pie_chart": false,
-            "query": "message:\"iptables Packet Dropped\"",
-            "show_data_table": true
-          },
-          "col": 2,
-          "row": 2,
-          "height": 0,
-          "width": 0
-        },
-        {
-          "description": "iptables_src",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "iptables_src",
-            "show_pie_chart": false,
-            "query": "message:\"iptables Packet Dropped\"",
-            "show_data_table": true
-          },
-          "col": 2,
-          "row": 4,
-          "height": 0,
-          "width": 0
-        },
-        {
-          "description": "iptables_dport",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "iptables_dport",
-            "show_pie_chart": false,
-            "query": "message:\"iptables Packet Dropped\"",
-            "show_data_table": true
-          },
-          "col": 1,
-          "row": 4,
-          "height": 0,
-          "width": 0
-        },
-        {
-          "description": "iptables_dst",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "iptables_dst",
-            "show_pie_chart": false,
-            "query": "message:\"iptables Packet Dropped\"",
-            "show_data_table": true
-          },
-          "col": 1,
-          "row": 2,
-          "height": 0,
-          "width": 0
-        },
-        {
-          "description": "iptables Packet Dropped",
-          "type": "SEARCH_RESULT_CHART",
-          "cache_time": 10,
-          "configuration": {
-            "interval": "hour",
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "query": "message:\"iptables Packet Dropped\""
-          },
-          "col": 1,
-          "row": 1,
-          "height": 0,
-          "width": 0
+          "height": 1,
+          "width": 2
         }
       ]
     }
@@ -923,3 +885,4 @@
   "lookup_caches": [],
   "lookup_data_adapters": []
 }
+
