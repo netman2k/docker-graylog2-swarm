@@ -1,6 +1,6 @@
 {
-  "name": "Syslog operations",
-  "description": "This content pack checks some Linux operations and security activities like logon, logoff.\nIt has some usefull dashboards to overview the linux operations.",
+  "name": "Kafka/Syslog contentpack",
+  "description": "Kafka Syslog",
   "category": "Linux",
   "inputs": [
     {
@@ -32,7 +32,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 0
+          "order": 1
         },
         {
           "title": "User Deleted",
@@ -46,7 +46,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 0
+          "order": 1
         },
         {
           "title": "Group removed",
@@ -60,7 +60,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 0
+          "order": 1
         },
         {
           "title": "Group created",
@@ -74,7 +74,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 0
+          "order": 1
         },
         {
           "title": "User password change",
@@ -88,7 +88,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 0
+          "order": 1
         },
         {
           "title": "User logged off",
@@ -102,7 +102,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 0
+          "order": 1
         },
         {
           "title": "User logged in with password",
@@ -116,21 +116,21 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 0
+          "order": 1
         },
         {
           "title": "User logged in with public key",
           "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "ssh_login_username",
+          "source_field": "message",
           "configuration": {
             "regex_value": "Accepted publickey for (.+?)\\s.*"
           },
           "converters": [],
-          "order": 0,
-          "cursor_strategy": "COPY",
-          "target_field": "ssh_login_username",
-          "source_field": "message",
           "condition_type": "REGEX",
-          "condition_value": "[a-zA-Z.]+."
+          "condition_value": "[a-zA-Z.]+.",
+          "order": 1
         },
         {
           "title": "SSH Login IP",
@@ -144,49 +144,49 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 0
+          "order": 1
         },
         {
           "title": "Password failed source",
           "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "ssh_fail_source",
+          "source_field": "message",
           "configuration": {
             "regex_value": "Failed password for .+ from (.+) port"
           },
           "converters": [],
-          "order": 0,
-          "cursor_strategy": "COPY",
-          "target_field": "ssh_fail_source",
-          "source_field": "message",
           "condition_type": "REGEX",
-          "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})"
+          "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})",
+          "order": 1
         },
         {
           "title": "Password failed user",
           "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "ssh_fail_username",
+          "source_field": "message",
           "configuration": {
             "regex_value": "Failed password for (.+) from "
           },
           "converters": [],
-          "order": 0,
-          "cursor_strategy": "COPY",
-          "target_field": "ssh_fail_username",
-          "source_field": "message",
           "condition_type": "REGEX",
-          "condition_value": "([^\\s]+)"
+          "condition_value": "([^\\s]+)",
+          "order": 1
         },
         {
           "title": "SSH fail invalid username",
           "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "ssh_fail_invalid_username",
+          "source_field": "message",
           "configuration": {
             "regex_value": "Invalid user (.+) from .+"
           },
           "converters": [],
-          "order": 0,
-          "cursor_strategy": "COPY",
-          "target_field": "ssh_fail_invalid_username",
-          "source_field": "message",
           "condition_type": "REGEX",
-          "condition_value": "([^\\s]+)"
+          "condition_value": "([^\\s]+)",
+          "order": 1
         },
         {
           "title": "'su' session user",
@@ -200,7 +200,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 0
+          "order": 1
         },
         {
           "title": "'su' opened by",
@@ -214,7 +214,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 0
+          "order": 1
         },
         {
           "title": "'su' failed user",
@@ -228,63 +228,63 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 0
+          "order": 1
         },
         {
           "title": "Bash_Real_Username",
           "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "Bash_Real_Username",
+          "source_field": "message",
           "configuration": {
             "regex_value": "\\[(\\w+\\.?\\w+)/"
           },
           "converters": [],
-          "order": 0,
-          "cursor_strategy": "COPY",
-          "target_field": "Bash_Real_Username",
-          "source_field": "message",
           "condition_type": "REGEX",
-          "condition_value": "[a-zA-Z.]+."
+          "condition_value": "[a-zA-Z.]+.",
+          "order": 1
         },
         {
           "title": "Bash_Sub_Username",
           "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "Bash_Sub_Username",
+          "source_field": "message",
           "configuration": {
             "regex_value": "\\[\\w+\\.?\\w+/[\\d|\\.]+\\s\\w+\\s(\\w+\\.?\\w+)/"
           },
           "converters": [],
-          "order": 0,
-          "cursor_strategy": "COPY",
-          "target_field": "Bash_Sub_Username",
-          "source_field": "message",
           "condition_type": "REGEX",
-          "condition_value": "[a-zA-Z.]+."
+          "condition_value": "[a-zA-Z.]+.",
+          "order": 1
         },
         {
           "title": "Current_Working_Dir",
           "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "Current_Working_Dir",
+          "source_field": "message",
           "configuration": {
             "regex_value": "\\[.*\\]\\s+(.*):"
           },
           "converters": [],
-          "order": 0,
-          "cursor_strategy": "COPY",
-          "target_field": "Current_Working_Dir",
-          "source_field": "message",
           "condition_type": "STRING",
-          "condition_value": ""
+          "condition_value": "",
+          "order": 1
         },
         {
           "title": "Command_Executed",
           "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "Command_Executed",
+          "source_field": "message",
           "configuration": {
             "regex_value": "\\[.*\\]\\s+[a-zA-Z./-_]+:\\s+(.*)"
           },
           "converters": [],
-          "order": 0,
-          "cursor_strategy": "COPY",
-          "target_field": "Command_Executed",
-          "source_field": "message",
           "condition_type": "STRING",
-          "condition_value": ""
+          "condition_value": "",
+          "order": 1
         },
         {
           "title": "Yum package installed",
@@ -298,7 +298,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 0
+          "order": 1
         },
         {
           "title": "Yum package removed",
@@ -312,10 +312,10 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 0
+          "order": 1
         },
         {
-          "title": "Service started",
+          "title": "Systemd Service started",
           "type": "REGEX",
           "cursor_strategy": "COPY",
           "target_field": "service_started",
@@ -326,10 +326,10 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 0
+          "order": 1
         },
         {
-          "title": "Service stopped",
+          "title": "Systemd Service stopped",
           "type": "REGEX",
           "cursor_strategy": "COPY",
           "target_field": "service_stopped",
@@ -340,82 +340,91 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 0
+          "order": 1
         },
         {
-          "title": "Generic IP Extractor",
+          "title": "iptables Packet Dropped dst",
           "type": "REGEX",
-          "configuration": {
-            "regex_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})"
-          },
-          "converters": [],
-          "order": 0,
           "cursor_strategy": "COPY",
-          "target_field": "generic_ip1",
+          "target_field": "iptables_dst",
           "source_field": "message",
-          "condition_type": "REGEX",
-          "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})"
-        },
-        {
-          "title": "Generic IP Extractor",
-          "type": "REGEX",
-          "configuration": {
-            "regex_value": "[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}.*?(([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))"
-          },
-          "converters": [],
-          "order": 0,
-          "cursor_strategy": "COPY",
-          "target_field": "generic_ip2",
-          "source_field": "message",
-          "condition_type": "REGEX",
-          "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})"
-        },
-        {
-          "title": "IPTables_Packet_Dropped_iptables_dst",
-          "type": "REGEX",
           "configuration": {
             "regex_value": "^.*DST=([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})"
           },
           "converters": [],
-          "order": 1,
-          "cursor_strategy": "COPY",
-          "target_field": "iptables_dst",
-          "source_field": "message",
           "condition_type": "REGEX",
-          "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})"
+          "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})",
+          "order": 1
         },
         {
-          "title": "IPTables_Packet_Dropped_iptables_src",
+          "title": "iptables Packet Dropped src",
           "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "iptables_src",
+          "source_field": "message",
           "configuration": {
             "regex_value": "^.*SRC=([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})"
           },
           "converters": [],
-          "order": 2,
-          "cursor_strategy": "COPY",
-          "target_field": "iptables_src",
-          "source_field": "message",
           "condition_type": "REGEX",
-          "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})"
+          "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})",
+          "order": 2
         },
         {
-          "title": "IPTables_Packet_Dropped_iptables_dport",
+          "title": "iptables Packet Dropped dport",
           "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "iptables_dport",
+          "source_field": "message",
           "configuration": {
             "regex_value": "^.*DPT=([0-9]+)"
           },
           "converters": [],
-          "order": 3,
-          "cursor_strategy": "COPY",
-          "target_field": "iptables_dport",
-          "source_field": "message",
           "condition_type": "REGEX",
-          "condition_value": "[^0-9]"
+          "condition_value": "[^0-9]",
+          "order": 3
+        },
+        {
+          "title": "JSON extractor",
+          "type": "JSON",
+          "cursor_strategy": "COPY",
+          "target_field": "",
+          "source_field": "message",
+          "configuration": {
+            "list_separator": ", ",
+            "kv_separator": "=",
+            "key_prefix": "",
+            "key_separator": "_",
+            "replace_key_whitespace": false,
+            "key_whitespace_replacement": "_"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 0
         }
       ]
     }
   ],
   "streams": [
+    {
+      "id": "5acf6aad5cee3803d5eccfa3",
+      "title": "User Operations : User created",
+      "description": "New user created",
+      "disabled": false,
+      "matching_type": "AND",
+      "stream_rules": [
+        {
+          "type": "CONTAINS",
+          "field": "message",
+          "value": "new user: name=",
+          "inverted": false,
+          "description": ""
+        }
+      ],
+      "outputs": [],
+      "default_stream": false
+    },
     {
       "id": "5acf70a45cee3803d5ecd649",
       "title": "Package Operations : A yum package installed",
@@ -445,24 +454,6 @@
           "type": "REGEX",
           "field": "message",
           "value": "yum\\[.+]:\\s+Erased:\\s(.+)",
-          "inverted": false,
-          "description": ""
-        }
-      ],
-      "outputs": [],
-      "default_stream": false
-    },
-    {
-      "id": "5acf6aad5cee3803d5eccfa3",
-      "title": "User Operations : User created",
-      "description": "New user created",
-      "disabled": false,
-      "matching_type": "AND",
-      "stream_rules": [
-        {
-          "type": "CONTAINS",
-          "field": "message",
-          "value": "new user: name=",
           "inverted": false,
           "description": ""
         }
@@ -616,95 +607,6 @@
           "width": 2
         }
       ]
-    },   
-    {
-      "title": "IPTables Packet Dropped",
-      "description": "IPTables Packet Dropped",
-      "dashboard_widgets": [
-        {
-          "description": "Target Host",
-          "type": "QUICKVALUES",
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "source",
-            "show_pie_chart": false,
-            "query": "message:\"IPTables Packet Dropped\"",
-            "show_data_table": true
-          },
-          "col": 2,
-          "row": 2,
-          "cache_time": 10
-        },
-        {
-          "description": "Iptables_src",
-          "type": "QUICKVALUES",
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "iptables_src",
-            "show_pie_chart": false,
-            "query": "message:\"IPTables Packet Dropped\"",
-            "show_data_table": true
-          },
-          "col": 2,
-          "row": 4,
-          "cache_time": 10
-        },
-        {
-          "description": "Iptables_dport",
-          "type": "QUICKVALUES",
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "iptables_dport",
-            "show_pie_chart": false,
-            "query": "message:\"IPTables Packet Dropped\"",
-            "show_data_table": true
-          },
-          "col": 1,
-          "row": 4,
-          "cache_time": 10
-        },
-        {
-          "description": "Iptables_dst",
-          "type": "QUICKVALUES",
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "iptables_dst",
-            "show_pie_chart": false,
-            "query": "message:\"IPTables Packet Dropped\"",
-            "show_data_table": true
-          },
-          "col": 1,
-          "row": 2,
-          "cache_time": 10
-        },
-        {
-          "description": "IPTables Packet Dropped",
-          "type": "SEARCH_RESULT_CHART",
-          "configuration": {
-            "interval": "hour",
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "query": "message:\"IPTables Packet Dropped\""
-          },
-          "col": 1,
-          "row": 1,
-          "cache_time": 10
-        }
-      ]
     },
     {
       "title": "SSHD",
@@ -713,6 +615,7 @@
         {
           "description": "SSH login",
           "type": "QUICKVALUES",
+          "cache_time": 10,
           "configuration": {
             "timerange": {
               "type": "relative",
@@ -725,11 +628,13 @@
           },
           "col": 2,
           "row": 9,
-          "cache_time": 10
+          "height": 0,
+          "width": 0
         },
         {
           "description": "ssh_login_username",
           "type": "QUICKVALUES",
+          "cache_time": 10,
           "configuration": {
             "timerange": {
               "type": "relative",
@@ -742,11 +647,13 @@
           },
           "col": 1,
           "row": 6,
-          "cache_time": 10
+          "height": 0,
+          "width": 0
         },
         {
           "description": "Fail2ban Unban",
           "type": "QUICKVALUES",
+          "cache_time": 10,
           "configuration": {
             "timerange": {
               "type": "relative",
@@ -759,11 +666,13 @@
           },
           "col": 2,
           "row": 5,
-          "cache_time": 10
+          "height": 0,
+          "width": 0
         },
         {
           "description": "Fail2ban Ban",
           "type": "QUICKVALUES",
+          "cache_time": 10,
           "configuration": {
             "timerange": {
               "type": "relative",
@@ -776,11 +685,13 @@
           },
           "col": 2,
           "row": 3,
-          "cache_time": 10
+          "height": 0,
+          "width": 0
         },
         {
           "description": "SSH Failure count",
           "type": "SEARCH_RESULT_COUNT",
+          "cache_time": 10,
           "configuration": {
             "timerange": {
               "type": "relative",
@@ -792,11 +703,13 @@
           },
           "col": 1,
           "row": 1,
-          "cache_time": 10
+          "height": 0,
+          "width": 0
         },
         {
           "description": "SSH Login failures",
           "type": "SEARCH_RESULT_CHART",
+          "cache_time": 10,
           "configuration": {
             "interval": "hour",
             "timerange": {
@@ -807,11 +720,13 @@
           },
           "col": 2,
           "row": 1,
-          "cache_time": 10
+          "height": 0,
+          "width": 0
         },
         {
           "description": "SSH login failed server",
           "type": "QUICKVALUES",
+          "cache_time": 10,
           "configuration": {
             "timerange": {
               "type": "relative",
@@ -824,11 +739,13 @@
           },
           "col": 1,
           "row": 4,
-          "cache_time": 10
+          "height": 0,
+          "width": 0
         },
         {
           "description": "Failed SSHD Metrics",
           "type": "QUICKVALUES",
+          "cache_time": 10,
           "configuration": {
             "timerange": {
               "type": "relative",
@@ -841,11 +758,13 @@
           },
           "col": 1,
           "row": 8,
-          "cache_time": 10
+          "height": 0,
+          "width": 0
         },
         {
           "description": "SSH Login Failed Source IP",
           "type": "QUICKVALUES",
+          "cache_time": 10,
           "configuration": {
             "timerange": {
               "type": "relative",
@@ -858,11 +777,13 @@
           },
           "col": 1,
           "row": 2,
-          "cache_time": 10
+          "height": 0,
+          "width": 0
         },
         {
           "description": "Root Login",
           "type": "QUICKVALUES",
+          "cache_time": 10,
           "configuration": {
             "timerange": {
               "type": "relative",
@@ -875,22 +796,124 @@
           },
           "col": 2,
           "row": 7,
-          "cache_time": 10
+          "height": 0,
+          "width": 0
         },
         {
           "description": "SSH Connection Dropped",
           "type": "SEARCH_RESULT_CHART",
+          "cache_time": 10,
           "configuration": {
             "interval": "hour",
             "timerange": {
               "type": "relative",
               "range": 86400
             },
-            "query": "message:\"IPTables Packet Dropped\" AND iptables_dport:22"
+            "query": "message:\"iptables Packet Dropped\" AND iptables_dport:22"
           },
           "col": 2,
           "row": 2,
-          "cache_time": 10
+          "height": 0,
+          "width": 0
+        }
+      ]
+    },
+    {
+      "title": "iptables packet dropped",
+      "description": "iptables Packet Dropped",
+      "dashboard_widgets": [
+        {
+          "description": "Target Host",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "source",
+            "show_pie_chart": false,
+            "query": "message:\"iptables Packet Dropped\"",
+            "show_data_table": true
+          },
+          "col": 2,
+          "row": 2,
+          "height": 0,
+          "width": 0
+        },
+        {
+          "description": "iptables_src",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "iptables_src",
+            "show_pie_chart": false,
+            "query": "message:\"iptables Packet Dropped\"",
+            "show_data_table": true
+          },
+          "col": 2,
+          "row": 4,
+          "height": 0,
+          "width": 0
+        },
+        {
+          "description": "iptables_dport",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "iptables_dport",
+            "show_pie_chart": false,
+            "query": "message:\"iptables Packet Dropped\"",
+            "show_data_table": true
+          },
+          "col": 1,
+          "row": 4,
+          "height": 0,
+          "width": 0
+        },
+        {
+          "description": "iptables_dst",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "iptables_dst",
+            "show_pie_chart": false,
+            "query": "message:\"iptables Packet Dropped\"",
+            "show_data_table": true
+          },
+          "col": 1,
+          "row": 2,
+          "height": 0,
+          "width": 0
+        },
+        {
+          "description": "iptables Packet Dropped",
+          "type": "SEARCH_RESULT_CHART",
+          "cache_time": 10,
+          "configuration": {
+            "interval": "hour",
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "query": "message:\"iptables Packet Dropped\""
+          },
+          "col": 1,
+          "row": 1,
+          "height": 0,
+          "width": 0
         }
       ]
     }
