@@ -49,6 +49,20 @@
           "order": 1
         },
         {
+          "title": "User Changed",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "user_changed",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "\\]: change user \\'(.+?)\\'"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 1
+        },
+        {
           "title": "Group removed",
           "type": "REGEX",
           "cursor_strategy": "COPY",
@@ -301,6 +315,20 @@
           "order": 1
         },
         {
+          "title": "Yum package updated",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "yum_package_updated",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "yum\\[.+]:\\s+Updated:\\s(.+)"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 1
+        },
+        {
           "title": "Yum package removed",
           "type": "REGEX",
           "cursor_strategy": "COPY",
@@ -410,14 +438,28 @@
     {
       "id": "5acf6aad5cee3803d5eccfa3",
       "title": "User Operations",
-      "description": "User operation can be created, deleted, updated",
+      "description": "User operation: created, deleted, or changed",
       "disabled": false,
-      "matching_type": "AND",
+      "matching_type": "OR",
       "stream_rules": [
         {
-          "type": "CONTAINS",
-          "field": "message",
-          "value": "\"new user: name= \" OR \"delete user\" OR \"change user\"",
+          "type": "PRESENCE",
+          "field": "user_created",
+          "value": "",
+          "inverted": false,
+          "description": ""
+        },
+        {
+          "type": "PRESENCE",
+          "field": "user_changed",
+          "value": "",
+          "inverted": false,
+          "description": ""
+        },
+        {
+          "type": "PRESENCE",
+          "field": "user_deleted",
+          "value": "",
           "inverted": false,
           "description": ""
         }
@@ -427,33 +469,29 @@
     },
     {
       "id": "5acf70a45cee3803d5ecd649",
-      "title": "Package Operations : A yum package installed",
-      "description": "A yum package installed",
+      "title": "Package Operations",
+      "description": "A yum package operation: installed, updated, or deleted",
       "disabled": false,
-      "matching_type": "AND",
+      "matching_type": "OR",
       "stream_rules": [
         {
-          "type": "REGEX",
-          "field": "message",
-          "value": "yum\\[.+]:\\s+Installed",
+          "type": "PRESENCE",
+          "field": "yum_package_deleted",
+          "value": "",
           "inverted": false,
           "description": ""
-        }
-      ],
-      "outputs": [],
-      "default_stream": false
-    },
-    {
-      "id": "5acf70f25cee3803d5ecd6a1",
-      "title": "Package Operations : A yum package removed",
-      "description": "A yum package removed",
-      "disabled": false,
-      "matching_type": "AND",
-      "stream_rules": [
+        },
         {
-          "type": "REGEX",
-          "field": "message",
-          "value": "yum\\[.+]:\\s+Erased:\\s(.+)",
+          "type": "PRESENCE",
+          "field": "yum_package_updated",
+          "value": "",
+          "inverted": false,
+          "description": ""
+        },
+        {
+          "type": "PRESENCE",
+          "field": "yum_package_installed",
+          "value": "",
           "inverted": false,
           "description": ""
         }
