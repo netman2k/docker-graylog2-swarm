@@ -36,6 +36,7 @@ function create_service(){
       --network $NETWORK_NAME_ELASTICSEARCH \
       --network $NETWORK_NAME_MONGO \
       --network $NETWORK_NAME_PROXY \
+      --network $NETWORK_NAME_KAFKA \
       --reserve-cpu 0.5 \
       --reserve-memory 2G --limit-memory 3G \
       --hostname graylog \
