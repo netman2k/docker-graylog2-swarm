@@ -500,7 +500,7 @@
               "type": "relative",
               "range": 86400
             },
-            "field": "source",
+            "field": "syslog_hostname",
             "query": "message:\".yum\" AND message:\".Installed\"",
             "show_data_table": true,
             "limit": 5,
@@ -569,7 +569,7 @@
               "type": "relative",
               "range": 86400
             },
-            "field": "source",
+            "field": "syslog_hostname",
             "query": "message:\".yum\" AND message:\".Erased\"",
             "show_data_table": true,
             "limit": 5,
@@ -621,7 +621,7 @@
               "type": "relative",
               "range": 86400
             },
-            "field": "source",
+            "field": "syslog_hostname",
             "show_pie_chart": false,
             "query": "message:\" Accepted publickey for \" OR message:\" Accepted password for \"",
             "show_data_table": true
