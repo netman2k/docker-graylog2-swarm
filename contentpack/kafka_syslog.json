@@ -1,6 +1,6 @@
 {
-  "name": "Kafka/Syslog contentpack",
-  "description": "Kafka Syslog",
+  "name": "Kafka/Syslog v1.0",
+  "description": "Kafka Syslog v1.0",
   "category": "Linux",
   "inputs": [
     {
@@ -609,7 +609,7 @@
       ]
     },
     {
-      "title": "SSHD",
+      "title": "SSH login/failures",
       "description": "SSH login/failures",
       "dashboard_widgets": [
         {
