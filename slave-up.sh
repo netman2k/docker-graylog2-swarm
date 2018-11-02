@@ -15,10 +15,11 @@ function create_service(){
   if [ ! "x${id}" = "x" ];then 
     docker service create --name graylog2-slave \
       --config "source=${CONFIG_NAME},target=/docker-entrypoint.sh,mode=0755" \
+      --config "source=${CONFIG_NAME2},target=/usr/share/graylog/plugin/metrics-reporter-prometheus-1.5.0.jar,mode=0664" \
       --env "TZ=Asia/Seoul" \
       --env "GRAYLOG_ROOT_TIMEZONE=Asia/Seoul" \
       --env "GRAYLOG_IS_MASTER=false" \
-      --env "GRAYLOG_WEB_ENABLE=false" \
+      --env "GRAYLOG_WEB_ENABLE=true " \
       --env "GRAYLOG_PASSWORD_SECRET=${GRAYLOG_PASSWORD_SECRET}" \
       --env "GRAYLOG_ROOT_PASSWORD_SHA2=${GRAYLOG_ROOT_PASSWORD_SHA2}" \
       --env "GRAYLOG_ELASTICSEARCH_HOSTS=${ELASTICSEARCH_URL}" \
@@ -30,6 +31,7 @@ function create_service(){
       --network $NETWORK_NAME_MONGO \
       --network $NETWORK_NAME_PROXY \
       --network $NETWORK_NAME_KAFKA \
+      --network $NETWORK_NAME_MONITOR \
       --reserve-cpu 0.5 \
       --reserve-memory 2G --limit-memory 3G \
       $IMAGE
