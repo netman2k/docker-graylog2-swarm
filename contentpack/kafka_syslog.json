@@ -409,15 +409,15 @@
   "streams": [
     {
       "id": "5acf6aad5cee3803d5eccfa3",
-      "title": "User Operations : User created",
-      "description": "New user created",
+      "title": "User Operations",
+      "description": "User operation can be created, deleted, updated",
       "disabled": false,
       "matching_type": "AND",
       "stream_rules": [
         {
           "type": "CONTAINS",
           "field": "message",
-          "value": "new user: name=",
+          "value": "\"new user: name= \" OR \"delete user\" OR \"change user\"",
           "inverted": false,
           "description": ""
         }
