@@ -1,14 +1,4 @@
 #!/bin/bash
-
-function create_network(){
-  # Create an overlay network for graylog cluster
-  local -r network=$(docker network ls -f "name=${NETWORK_NAME_GRAYLOG}" -q)
-  if [ "x${network}" = "x" ];then 
-    docker network create -d overlay --attachable "${NETWORK_NAME_GRAYLOG}"
-    [ "$?" -eq "0" ] || { echo -e "\nUnable to create an overlay network, ${NETWORK_NAME_GRAYLOG}\n" 1>&2; cleanup ; exit 1; }
-  fi
-}
-
 function cleanup(){
   local id=$(docker service ls -f 'name=graylog2-master' -q)
   if [ ! "x${id}" = "x" ];then 

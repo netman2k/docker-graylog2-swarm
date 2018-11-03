@@ -32,7 +32,6 @@ function create_service(){
       --label "com.df.serviceDomain=${GRAYLOG_SERVICE_DOMAIN_NAME}" \
       --label "com.df.backendExtra=option httpchk HEAD /api/system/lbstatus" \
       --label "com.df.setReqHeader=X-Graylog-Server-URL http://${GRAYLOG_SERVICE_DOMAIN_NAME}/api" \
-      --network $NETWORK_NAME_GRAYLOG \
       --network $NETWORK_NAME_ELASTICSEARCH \
       --network $NETWORK_NAME_MONGO \
       --network $NETWORK_NAME_PROXY \
@@ -41,11 +40,11 @@ function create_service(){
       --network $NETWORK_NAME_MONITOR \
       --reserve-cpu 0.5 \
       --reserve-memory 2G --limit-memory 3G \
+      --constraint "node.labels.graylog2=master" \
       --hostname "{{.Node.Hostname}}" \
       $IMAGE
   fi
 }
 
-create_network
 create_config
 create_service
