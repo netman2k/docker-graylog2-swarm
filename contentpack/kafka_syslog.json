@@ -4,7 +4,6 @@
   "category": "Linux",
   "inputs": [
     {
-      "id": "5bd6c197bcece1000179d0fb",
       "title": "Syslog messages",
       "configuration": {
         "topic_filter": "^syslog$",
@@ -14,11 +13,11 @@
         "throttling_allowed": true,
         "fetch_min_bytes": 5,
         "threads": 2,
-        "override_source": "KAFKA"
+        "override_source": ""
       },
       "static_fields": {},
       "type": "org.graylog2.inputs.raw.kafka.RawKafkaInput",
-      "global": true,
+      "global": false,
       "extractors": [
         {
           "title": "User Created",
@@ -32,7 +31,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "User Deleted",
@@ -46,7 +45,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "User Changed",
@@ -60,7 +59,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "Group removed",
@@ -74,7 +73,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "Group created",
@@ -88,7 +87,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "Group changed",
@@ -102,7 +101,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "User password change",
@@ -116,7 +115,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "User logged off",
@@ -130,7 +129,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "User logged in with password",
@@ -144,7 +143,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "User logged in with public key",
@@ -158,7 +157,7 @@
           "converters": [],
           "condition_type": "REGEX",
           "condition_value": "[a-zA-Z.]+.",
-          "order": 1
+          "order": 2
         },
         {
           "title": "SSH Login IP",
@@ -172,7 +171,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "Password failed source",
@@ -186,7 +185,7 @@
           "converters": [],
           "condition_type": "REGEX",
           "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})",
-          "order": 1
+          "order": 2
         },
         {
           "title": "Password failed user",
@@ -200,7 +199,7 @@
           "converters": [],
           "condition_type": "REGEX",
           "condition_value": "([^\\s]+)",
-          "order": 1
+          "order": 2
         },
         {
           "title": "SSH fail invalid username",
@@ -214,7 +213,7 @@
           "converters": [],
           "condition_type": "REGEX",
           "condition_value": "([^\\s]+)",
-          "order": 1
+          "order": 2
         },
         {
           "title": "'su' session user",
@@ -228,7 +227,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "'su' opened by",
@@ -242,7 +241,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "'su' failed user",
@@ -256,7 +255,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "Bash_Real_Username",
@@ -270,7 +269,7 @@
           "converters": [],
           "condition_type": "REGEX",
           "condition_value": "[a-zA-Z.]+.",
-          "order": 1
+          "order": 2
         },
         {
           "title": "Bash_Sub_Username",
@@ -284,7 +283,7 @@
           "converters": [],
           "condition_type": "REGEX",
           "condition_value": "[a-zA-Z.]+.",
-          "order": 1
+          "order": 2
         },
         {
           "title": "Current_Working_Dir",
@@ -298,7 +297,7 @@
           "converters": [],
           "condition_type": "STRING",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "Command_Executed",
@@ -312,7 +311,7 @@
           "converters": [],
           "condition_type": "STRING",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "Yum package installed",
@@ -326,7 +325,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "Yum package updated",
@@ -340,7 +339,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "Yum package removed",
@@ -354,7 +353,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "Systemd Service started",
@@ -368,7 +367,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "Systemd Service stopped",
@@ -382,7 +381,7 @@
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
-          "order": 1
+          "order": 2
         },
         {
           "title": "iptables Packet Dropped dst",
@@ -396,7 +395,7 @@
           "converters": [],
           "condition_type": "REGEX",
           "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})",
-          "order": 1
+          "order": 2
         },
         {
           "title": "iptables Packet Dropped src",
@@ -410,7 +409,7 @@
           "converters": [],
           "condition_type": "REGEX",
           "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})",
-          "order": 2
+          "order": 3
         },
         {
           "title": "iptables Packet Dropped dport",
@@ -424,7 +423,7 @@
           "converters": [],
           "condition_type": "REGEX",
           "condition_value": "[^0-9]",
-          "order": 3
+          "order": 4
         },
         {
           "title": "JSON extractor",
@@ -444,8 +443,20 @@
           "condition_type": "NONE",
           "condition_value": "",
           "order": 0
+        },
+        {
+          "title": "make syslog_hostname as host",
+          "type": "COPY_INPUT",
+          "cursor_strategy": "COPY",
+          "target_field": "source",
+          "source_field": "syslog_hostname",
+          "configuration": {},
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 1
         }
-      ]
+]
     }
   ],
   "streams": [
