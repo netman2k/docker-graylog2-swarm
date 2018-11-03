@@ -26,7 +26,6 @@ function create_service(){
       --env "GRAYLOG_MONGODB_URI=${MONGODB_URI}" \
       --env "MAXMIND_DOWNLOAD_URI=${MAXMIND_DOWNLOAD_URL}" \
       --env "GRAYLOG_WEB_ENDPOINT_URI=http://${GRAYLOG_SERVICE_DOMAIN_NAME}/api" \
-      --hostname "{{.Node.Hostname}}" \
       --label "com.df.notify=true" \
       --label "com.df.servicePath=/,/api" \
       --label "com.df.port=9000" \
@@ -42,7 +41,7 @@ function create_service(){
       --network $NETWORK_NAME_MONITOR \
       --reserve-cpu 0.5 \
       --reserve-memory 2G --limit-memory 3G \
-      --hostname graylog \
+      --hostname "{{.Node.Hostname}}" \
       $IMAGE
   fi
 }
