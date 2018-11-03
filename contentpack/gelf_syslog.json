@@ -58,7 +58,7 @@
           "condition_type": "NONE",
           "condition_value": "",
           "order": 1
-        },
+        },      
         {
           "title": "Group removed",
           "type": "REGEX",
@@ -66,7 +66,7 @@
           "target_field": "group_removed",
           "source_field": "message",
           "configuration": {
-            "regex_value": "\\]: removed group \\'(.+?)\\'"
+            "regex_value": "\\]: group \\'(.+?)\\' removed"
           },
           "converters": [],
           "condition_type": "NONE",
@@ -87,6 +87,20 @@
           "condition_value": "",
           "order": 1
         },
+        {
+          "title": "Group changed",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "group_changed",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "\\]: group changed in (.+?) \\((.+?)\\)"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 1
+        },        
         {
           "title": "User password change",
           "type": "REGEX",
@@ -427,8 +441,8 @@
   "streams": [
     {
       "id": "5acf6aad5cee3803d5eccfa3",
-      "title": "User Operations",
-      "description": "User operation: created, deleted, or changed",
+      "title": "User/Group Operations",
+      "description": "User/Group operation: created, deleted, or changed",
       "disabled": false,
       "matching_type": "OR",
       "stream_rules": [
@@ -452,7 +466,28 @@
           "value": "",
           "inverted": false,
           "description": ""
-        }
+        },
+        {
+          "type": "PRESENCE",
+          "field": "group_created",
+          "value": "",
+          "inverted": false,
+          "description": ""
+        },
+        {
+          "type": "PRESENCE",
+          "field": "group_changed",
+          "value": "",
+          "inverted": false,
+          "description": ""
+        },
+        {
+          "type": "PRESENCE",
+          "field": "group_removed",
+          "value": "",
+          "inverted": false,
+          "description": ""
+        }        
       ],
       "outputs": [],
       "default_stream": false
