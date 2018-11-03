@@ -19,18 +19,20 @@ function create_service(){
       --env "TZ=Asia/Seoul" \
       --env "GRAYLOG_ROOT_TIMEZONE=Asia/Seoul" \
       --env "GRAYLOG_IS_MASTER=false" \
-      --env "GRAYLOG_WEB_ENABLE=true " \
+      --env "GRAYLOG_WEB_ENABLE=false " \
       --env "GRAYLOG_PASSWORD_SECRET=${GRAYLOG_PASSWORD_SECRET}" \
       --env "GRAYLOG_ROOT_PASSWORD_SHA2=${GRAYLOG_ROOT_PASSWORD_SHA2}" \
       --env "GRAYLOG_ELASTICSEARCH_HOSTS=${ELASTICSEARCH_URL}" \
       --env "GRAYLOG_MONGODB_URI=${MONGODB_URI}" \
       --env "MAXMIND_DOWNLOAD_URI=${MAXMIND_DOWNLOAD_URL}" \
-      --env "GRAYLOG_WEB_ENDPOINT_URI=http://graylog2-master:9000/api" \
+      --env "GRAYLOG_WEB_ENDPOINT_URI=http://${GRAYLOG_SERVICE_DOMAIN_NAME}/api" \
+      --hostname "{{.Node.Hostname}}" \
       --network $NETWORK_NAME_GRAYLOG \
       --network $NETWORK_NAME_ELASTICSEARCH \
       --network $NETWORK_NAME_MONGO \
       --network $NETWORK_NAME_PROXY \
       --network $NETWORK_NAME_KAFKA \
+      --network $NETWORK_NAME_ZOOKEEPER \
       --network $NETWORK_NAME_MONITOR \
       --reserve-cpu 0.5 \
       --reserve-memory 2G --limit-memory 3G \
