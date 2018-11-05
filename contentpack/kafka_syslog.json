@@ -1,6 +1,6 @@
 {
-  "name": "Kafka/Syslog v1.0",
-  "description": "Kafka Syslog v1.0",
+  "name": "Kafka/Syslog v0.1",
+  "description": "Kafka Syslog v0.1",
   "category": "Linux",
   "inputs": [
     {
@@ -522,7 +522,7 @@
       "stream_rules": [
         {
           "type": "PRESENCE",
-          "field": "yum_package_deleted",
+          "field": "yum_package_removed",
           "value": "",
           "inverted": false,
           "description": ""
