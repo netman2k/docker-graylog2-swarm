@@ -36,11 +36,10 @@ function create_service(){
       --network $NETWORK_NAME_MONGO \
       --network $NETWORK_NAME_PROXY \
       --network $NETWORK_NAME_KAFKA \
-      --network $NETWORK_NAME_ZOOKEEPER \
       --network $NETWORK_NAME_MONITOR \
       --reserve-cpu 0.5 \
       --reserve-memory 2G --limit-memory 3G \
-      --constraint "node.labels.graylog2=master" \
+      --constraint "node.labels.graylog2==master" \
       --hostname "{{.Node.Hostname}}" \
       $IMAGE
   fi
