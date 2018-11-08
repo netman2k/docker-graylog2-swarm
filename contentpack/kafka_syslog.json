@@ -258,62 +258,6 @@
           "order": 2
         },
         {
-          "title": "Bash_Real_Username",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "Bash_Real_Username",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "\\[(\\w+\\.?\\w+)/"
-          },
-          "converters": [],
-          "condition_type": "REGEX",
-          "condition_value": "[a-zA-Z.]+.",
-          "order": 2
-        },
-        {
-          "title": "Bash_Sub_Username",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "Bash_Sub_Username",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "\\[\\w+\\.?\\w+/[\\d|\\.]+\\s\\w+\\s(\\w+\\.?\\w+)/"
-          },
-          "converters": [],
-          "condition_type": "REGEX",
-          "condition_value": "[a-zA-Z.]+.",
-          "order": 2
-        },
-        {
-          "title": "Current_Working_Dir",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "Current_Working_Dir",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "\\[.*\\]\\s+(.*):"
-          },
-          "converters": [],
-          "condition_type": "STRING",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "Command_Executed",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "Command_Executed",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "\\[.*\\]\\s+[a-zA-Z./-_]+:\\s+(.*)"
-          },
-          "converters": [],
-          "condition_type": "STRING",
-          "condition_value": "",
-          "order": 2
-        },
-        {
           "title": "Yum package installed",
           "type": "REGEX",
           "cursor_strategy": "COPY",
