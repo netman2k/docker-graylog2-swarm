@@ -53,7 +53,7 @@
   "gnetId": 6787,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1541725734401,
+  "iteration": 1541727868002,
   "links": [],
   "panels": [
     {
@@ -929,6 +929,444 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 23,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 1
+          },
+          "id": 25,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "org_graylog2_filters_ExtractorFilter_executionTime{quantile=\"0.999\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "0.999%",
+              "refId": "A"
+            },
+            {
+              "expr": "org_graylog2_filters_ExtractorFilter_executionTime{quantile=\"0.98\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "0.98%",
+              "refId": "D"
+            },
+            {
+              "expr": "org_graylog2_filters_ExtractorFilter_executionTime{quantile=\"0.75\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "0.75%",
+              "refId": "B"
+            },
+            {
+              "expr": "org_graylog2_filters_ExtractorFilter_executionTime",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 1,
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "ExtractorFilter Execution Time",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 6,
+            "y": 1
+          },
+          "id": 26,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "org_graylog2_filters_RulesFilter_executionTime{quantile=\"0.999\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "0.999%",
+              "refId": "A"
+            },
+            {
+              "expr": "org_graylog2_filters_RulesFilter_executionTime{quantile=\"0.98\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "0.98%",
+              "refId": "D"
+            },
+            {
+              "expr": "org_graylog2_filters_RulesFilter_executionTime{quantile=\"0.75\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "0.75%",
+              "refId": "B"
+            },
+            {
+              "expr": "org_graylog2_filters_RulesFilter_executionTime",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 1,
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "RulesFilter Execution Time",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 12,
+            "y": 1
+          },
+          "id": 27,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "org_graylog2_filters_StaticFieldFilter_executionTime{quantile=\"0.999\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "0.999%",
+              "refId": "A"
+            },
+            {
+              "expr": "org_graylog2_filters_StaticFieldFilter_executionTime{quantile=\"0.98\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "0.98%",
+              "refId": "D"
+            },
+            {
+              "expr": "org_graylog2_filters_StaticFieldFilter_executionTime{quantile=\"0.75\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "0.75%",
+              "refId": "B"
+            },
+            {
+              "expr": "org_graylog2_filters_StaticFieldFilter_executionTime",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 1,
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "RulesFilter Execution Time",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 18,
+            "y": 1
+          },
+          "id": 28,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "org_graylog2_filters_StreamMatcherFilter_executionTime{quantile=\"0.999\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "0.999%",
+              "refId": "A"
+            },
+            {
+              "expr": "org_graylog2_filters_StreamMatcherFilter_executionTime{quantile=\"0.98\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "0.98%",
+              "refId": "D"
+            },
+            {
+              "expr": "org_graylog2_filters_StreamMatcherFilter_executionTime{quantile=\"0.75\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "0.75%",
+              "refId": "B"
+            },
+            {
+              "expr": "org_graylog2_filters_StreamMatcherFilter_executionTime",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 1,
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "StreamMatcherFilter Execution Time",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "ExtractorFilter",
+      "type": "row"
     }
   ],
   "refresh": false,
@@ -1044,5 +1482,5 @@
   "timezone": "",
   "title": "Graylog",
   "uid": "uWFYXivmz",
-  "version": 3
+  "version": 4
 }
