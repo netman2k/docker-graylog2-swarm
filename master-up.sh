@@ -40,7 +40,7 @@ function create_service(){
       --reserve-cpu 0.5 \
       --reserve-memory 2G --limit-memory 3G \
       --constraint "node.labels.graylog2==master" \
-      --hostname "{{.Node.Hostname}}" \
+      --hostname "graylog2-master" \
       $IMAGE
   fi
 }
