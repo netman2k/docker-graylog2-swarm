@@ -1,7 +1,7 @@
 #!/bin/bash
 # Service Graylog up script
 declare -r DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-declare -r GRAYLOG_SERVICE_DOMAIN_NAME="graylog.toastmaker.net"
+declare -r GRAYLOG_SERVICE_DOMAIN_NAME=${GRAYLOG_DOMAIN:-"graylog.example.local"}
 
 # Declare environment variables
 source ${DIR}/env/common
