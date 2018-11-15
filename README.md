@@ -29,7 +29,7 @@ docker service scale graylog2-slave=<수>
 ### update_default_indexset.sh
 기본으로 설정되어져있는 Default indexset 설정 변경 명령을 내리는 스크립트
 
-다음은 graylog.example.net으로 서비스 중인 Graylog2가 사용 중인 ElasticSearch의 shard와 replicas 설정을 변경하는 방법을 보여준다.
+다음은 graylog.example.local로 서비스 중인 Graylog2가 사용 중인 ElasticSearch의 shard와 replicas 설정을 변경하는 방법을 보여준다.
 그 외 기타 설정은 내부 스크립트 상당에 변수로 설정되어있으니 참조하여 변경한다.
 ```
 export GRAYLOG_HOST="http://graylog.example.local"  
