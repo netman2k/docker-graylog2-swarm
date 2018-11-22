@@ -180,7 +180,7 @@
           "target_field": "",
           "source_field": "syslog_message",
           "configuration": {
-            "grok_pattern": "%{HOSTNAME:UNWANTED} %{NOTSPACE:login_username} login by %{NOTSPACE:kerberos_userid} \\(%{NOTSPACE:UNWANTED} \\(%{HOSTNAME:login_from}\\)\\)"
+            "grok_pattern": "%{HOSTNAME:UNWANTED} %{NOTSPACE:ssh_login_username} login by %{NOTSPACE:kerberos_userid} \\(%{NOTSPACE:UNWANTED} \\(%{HOSTNAME:login_from}\\)\\)"
           },
           "converters": [],
           "condition_type": "STRING",
