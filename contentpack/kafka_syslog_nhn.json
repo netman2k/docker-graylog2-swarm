@@ -1,6 +1,6 @@
 {
-  "name": "NHN/Syslog v0.1",
-  "description": "NHN/Syslog v0.1",
+  "name": "NHN/Kafka-Syslog v0.1",
+  "description": "NHN/Kafka-Syslog v0.1",
   "category": "Linux",
   "inputs": [
     {
