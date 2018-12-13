@@ -1,7 +1,7 @@
 {
-  "name": "NHN/Kafka-Syslog v0.1",
-  "description": "NHN/Kafka-Syslog v0.1",
-  "category": "Linux",
+  "name": "NHN/Kafka-Syslog v0.2",
+  "description": "NHN/Kafka-Syslog v0.2",
+  "category": "NHN",
   "inputs": [
     {
       "title": "Syslog messages",
@@ -19,370 +19,6 @@
       "type": "org.graylog2.inputs.raw.kafka.RawKafkaInput",
       "global": false,
       "extractors": [
-        {
-          "title": "User Created",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "user_created",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "\\]: new user: name=(.+?),\\s.*"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "User Deleted",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "user_deleted",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "\\]: delete user \\'(.+?)\\'"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "User Changed",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "user_changed",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "\\]: change user \\'(.+?)\\'"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "Group removed",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "group_removed",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "\\]: group \\'(.+?)\\' removed"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "Group created",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "group_created",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "\\]: new group: name=(.+?),\\s.*"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "Group changed",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "group_changed",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "\\]: group changed in (.+?) \\((.+?)\\)"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "User password change",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "user_pswd_change",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "chauthtok\\): password changed for (.+)"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "User logged off",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "user_logged_off",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "sshd:session\\): session closed for user (.+)"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "User logged in with password",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "login_user",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": ": Accepted password for (.+?)\\s.*"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "User logged in with public key",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "ssh_login_username",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "Accepted publickey for (.+?)\\s.*"
-          },
-          "converters": [],
-          "condition_type": "REGEX",
-          "condition_value": "[a-zA-Z.]+.",
-          "order": 2
-        },
-        {
-          "title": "SSH Login IP",
-          "type": "GROK",
-          "cursor_strategy": "COPY",
-          "target_field": "",
-          "source_field": "message",
-          "configuration": {
-            "grok_pattern": "%{IPV4}"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "kerberos account",
-          "type": "GROK",
-          "cursor_strategy": "COPY",
-          "target_field": "",
-          "source_field": "syslog_message",
-          "configuration": {
-            "grok_pattern": "%{HOSTNAME:UNWANTED} %{NOTSPACE:ssh_login_username} login by %{NOTSPACE:kerberos_userid} \\(%{NOTSPACE:UNWANTED} \\(%{HOSTNAME:login_from}\\)\\)"
-          },
-          "converters": [],
-          "condition_type": "STRING",
-          "condition_value": "login by",
-          "order": 2
-        },
-        {
-          "title": "Password failed source",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "ssh_fail_source",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "Failed password for .+ from (.+) port"
-          },
-          "converters": [],
-          "condition_type": "REGEX",
-          "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})",
-          "order": 2
-        },
-        {
-          "title": "Password failed user",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "ssh_fail_username",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "Failed password for (.+) from "
-          },
-          "converters": [],
-          "condition_type": "REGEX",
-          "condition_value": "([^\\s]+)",
-          "order": 2
-        },
-        {
-          "title": "SSH fail invalid username",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "ssh_fail_invalid_username",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "Invalid user (.+) from .+"
-          },
-          "converters": [],
-          "condition_type": "REGEX",
-          "condition_value": "([^\\s]+)",
-          "order": 2
-        },
-        {
-          "title": "'su' session user",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "su_session_user",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "\\(su-l:session\\): session opened for user (.+?)\\s.*"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "'su' opened by",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "su_opened_by_user",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "\\(su-l:session\\): session opened for user .+?\\sby\\s(.+)\\("
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "'su' failed user",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "su_failed_user",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "su: FAILED SU \\(to\\s(.+?)\\)\\s.*"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "Yum package installed",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "yum_package_installed",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "yum\\[.+]:\\s+Installed:\\s(.+)"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "Yum package updated",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "yum_package_updated",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "yum\\[.+]:\\s+Updated:\\s(.+)"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "Yum package removed",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "yum_package_removed",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "yum\\[.+]:\\s+Erased:\\s(.+)"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "Systemd Service started",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "service_started",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "systemd\\: Started (.+)"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "Systemd Service stopped",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "service_stopped",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "systemd\\: Stopped (.+)"
-          },
-          "converters": [],
-          "condition_type": "NONE",
-          "condition_value": "",
-          "order": 2
-        },
-        {
-          "title": "iptables Packet Dropped dst",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "iptables_dst",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "^.*DST=([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})"
-          },
-          "converters": [],
-          "condition_type": "REGEX",
-          "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})",
-          "order": 2
-        },
-        {
-          "title": "iptables Packet Dropped src",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "iptables_src",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "^.*SRC=([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})"
-          },
-          "converters": [],
-          "condition_type": "REGEX",
-          "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})",
-          "order": 3
-        },
-        {
-          "title": "iptables Packet Dropped dport",
-          "type": "REGEX",
-          "cursor_strategy": "COPY",
-          "target_field": "iptables_dport",
-          "source_field": "message",
-          "configuration": {
-            "regex_value": "^.*DPT=([0-9]+)"
-          },
-          "converters": [],
-          "condition_type": "REGEX",
-          "condition_value": "[^0-9]",
-          "order": 4
-        },
         {
           "title": "JSON extractor",
           "type": "JSON",
@@ -403,18 +39,518 @@
           "order": 0
         },
         {
-          "title": "make syslog_hostname as host",
-          "type": "COPY_INPUT",
+          "title": "General: Syslog5424 ",
+          "type": "GROK",
           "cursor_strategy": "COPY",
-          "target_field": "source",
-          "source_field": "syslog_hostname",
-          "configuration": {},
+          "target_field": "",
+          "source_field": "message",
+          "configuration": {
+            "grok_pattern": "<%{NONNEGINT:syslog5424_pri}>%{NONNEGINT:syslog5424_ver} +(?:%{TIMESTAMP_ISO8601:timestamp8601}|-) +(?:%{HOSTNAME:logsource}|-) +(?:%{WORD:syslog5424_appname}|-) +(?:%{WORD:syslog5424_procid}|-) +(?:%{WORD:syslog5424_msgid}|-) +(?:\\[%{DATA:syslog5424_sd}\\]+|-|) +(%{GREEDYDATA:message})"
+          },
           "converters": [],
           "condition_type": "NONE",
           "condition_value": "",
           "order": 1
+        },
+        {
+          "title": "General: SyslogOld",
+          "type": "GROK",
+          "cursor_strategy": "COPY",
+          "target_field": "",
+          "source_field": "message",
+          "configuration": {
+            "grok_pattern": "(?:%{SYSLOGTIMESTAMP:timestamp}|%{TIMESTAMP_ISO8601:timestamp8601}) (?:%{SYSLOGFACILITY} )?%{SYSLOGHOST:logsource} %{SYSLOGPROG}: %{GREEDYDATA:message}"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 1
+        },
+        {
+          "title": "Source Override: logsource",
+          "type": "COPY_INPUT",
+          "cursor_strategy": "COPY",
+          "target_field": "source",
+          "source_field": "logsource",
+          "configuration": {},
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 2
+        },
+        {
+          "title": "vmware extractor 1",
+          "type": "GROK",
+          "cursor_strategy": "COPY",
+          "target_field": "",
+          "source_field": "message",
+          "configuration": {
+            "grok_pattern": "(?<message-body>(?<message_system_info>(?:\\[%{DATA:message_thread_id} %{DATA:syslog_level} \\'%{DATA:message_service}\\'\\ ?%{DATA:message_opID}])) \\[%{DATA:message_service_info}]\\ (?<message-syslog>(%{GREEDYDATA})))"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 5
+        },
+        {
+          "title": "vmware extractor 2",
+          "type": "GROK",
+          "cursor_strategy": "COPY",
+          "target_field": "",
+          "source_field": "message",
+          "configuration": {
+            "grok_pattern": "(?<message-body>(?<message_system_info>(?:\\[%{DATA:message_thread_id} %{DATA:syslog_level} \\'%{DATA:message_service}\\'\\ ?%{DATA:message_opID}])) (?<message-syslog>(%{GREEDYDATA})))"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 5
+        },
+        {
+          "title": "vmware extractor 3",
+          "type": "GROK",
+          "cursor_strategy": "COPY",
+          "target_field": "",
+          "source_field": "message",
+          "configuration": {
+            "grok_pattern": "(?<message-body>(?<message_system_info>(?:\\[%{DATA:message_thread_id} %{DATA:syslog_level} \\'%{DATA:message_service}\\'\\ ?%{DATA:message_opID}])) (?<message-syslog>(%{GREEDYDATA})))"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 5
+        },
+        {
+          "title": "vmware extractor 4",
+          "type": "GROK",
+          "cursor_strategy": "COPY",
+          "target_field": "",
+          "source_field": "message",
+          "configuration": {
+            "grok_pattern": "%{SYSLOGPROG:syslog_program}: %{GREEDYDATA:message-syslog}"
+          },
+          "converters": [],
+          "condition_type": "STRING",
+          "condition_value": "vsanObserver.sh:",
+          "order": 5
+        },
+        {
+          "title": "vmware extractor 5",
+          "type": "GROK",
+          "cursor_strategy": "COPY",
+          "target_field": "",
+          "source_field": "message",
+          "configuration": {
+            "grok_pattern": "%{GREEDYDATA:message-syslog}"
+          },
+          "converters": [],
+          "condition_type": "STRING",
+          "condition_value": "hostd probing is done",
+          "order": 5
+        },
+        {
+          "title": "User Created",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "user_created",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "\\]: new user: name=(.+?),\\s.*"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "User Deleted",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "user_deleted",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "\\]: delete user \\'(.+?)\\'"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "User Changed",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "user_changed",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "\\]: change user \\'(.+?)\\'"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "Group removed",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "group_removed",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "\\]: group \\'(.+?)\\' removed"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "Group created",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "group_created",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "\\]: new group: name=(.+?),\\s.*"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "Group changed",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "group_changed",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "\\]: group changed in (.+?) \\((.+?)\\)"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "User password change",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "user_pswd_change",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "chauthtok\\): password changed for (.+)"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "User logged off",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "user_logged_off",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "sshd:session\\): session closed for user (.+)"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "User logged in with password",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "login_user",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": ": Accepted password for (.+?)\\s.*"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "User logged in with public key",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "ssh_login_username",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "Accepted publickey for (.+?)\\s.*"
+          },
+          "converters": [],
+          "condition_type": "REGEX",
+          "condition_value": "[a-zA-Z.]+.",
+          "order": 10
+        },
+        {
+          "title": "SSH Login IP",
+          "type": "GROK",
+          "cursor_strategy": "COPY",
+          "target_field": "",
+          "source_field": "message",
+          "configuration": {
+            "grok_pattern": "%{IPV4}"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "kerberos account",
+          "type": "GROK",
+          "cursor_strategy": "COPY",
+          "target_field": "",
+          "source_field": "message",
+          "configuration": {
+            "grok_pattern": "%{HOSTNAME:UNWANTED} %{NOTSPACE:ssh_login_username} login by %{NOTSPACE:kerberos_userid} \\(%{NOTSPACE:UNWANTED} \\(%{HOSTNAME:login_from}\\)\\)"
+          },
+          "converters": [],
+          "condition_type": "STRING",
+          "condition_value": "login by",
+          "order": 10
+        },
+        {
+          "title": "Password failed source",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "ssh_fail_source",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "Failed password for .+ from (.+) port"
+          },
+          "converters": [],
+          "condition_type": "REGEX",
+          "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})",
+          "order": 10
+        },
+        {
+          "title": "Password failed user",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "ssh_fail_username",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "Failed password for (.+) from "
+          },
+          "converters": [],
+          "condition_type": "REGEX",
+          "condition_value": "([^\\s]+)",
+          "order": 10
+        },
+        {
+          "title": "SSH fail invalid username",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "ssh_fail_invalid_username",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "Invalid user (.+) from .+"
+          },
+          "converters": [],
+          "condition_type": "REGEX",
+          "condition_value": "([^\\s]+)",
+          "order": 10
+        },
+        {
+          "title": "'su' session user",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "su_session_user",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "\\(su-l:session\\): session opened for user (.+?)\\s.*"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "'su' opened by",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "su_opened_by_user",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "\\(su-l:session\\): session opened for user .+?\\sby\\s(.+)\\("
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "'su' failed user",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "su_failed_user",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "su: FAILED SU \\(to\\s(.+?)\\)\\s.*"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "Yum package installed",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "yum_package_installed",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "yum\\[.+]:\\s+Installed:\\s(.+)"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "Yum package updated",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "yum_package_updated",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "yum\\[.+]:\\s+Updated:\\s(.+)"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "Yum package removed",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "yum_package_removed",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "yum\\[.+]:\\s+Erased:\\s(.+)"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "Systemd Service started",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "service_started",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "systemd\\: Started (.+)"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "Systemd Service stopped",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "service_stopped",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "systemd\\: Stopped (.+)"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 10
+        },
+        {
+          "title": "iptables Packet Dropped dst",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "iptables_dst",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "^.*DST=([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})"
+          },
+          "converters": [],
+          "condition_type": "REGEX",
+          "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})",
+          "order": 10
+        },
+        {
+          "title": "iptables Packet Dropped src",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "iptables_src",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "^.*SRC=([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})"
+          },
+          "converters": [],
+          "condition_type": "REGEX",
+          "condition_value": "([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})",
+          "order": 11
+        },
+        {
+          "title": "iptables Packet Dropped dport",
+          "type": "REGEX",
+          "cursor_strategy": "COPY",
+          "target_field": "iptables_dport",
+          "source_field": "message",
+          "configuration": {
+            "regex_value": "^.*DPT=([0-9]+)"
+          },
+          "converters": [],
+          "condition_type": "REGEX",
+          "condition_value": "[^0-9]",
+          "order": 12
         }
-]
+      ]
+    },
+    {
+      "id": "5bff8d2cf528fb00014091ac",
+      "title": "SyslogGrokParsingError Messages",
+      "configuration": {
+        "topic_filter": "^syslog_grokparsefailure$",
+        "fetch_wait_max": 100,
+        "offset_reset": "largest",
+        "zookeeper": "zoo1:2181,zoo2:2181,zoo3:2181",
+        "throttling_allowed": false,
+        "fetch_min_bytes": 5,
+        "threads": 2,
+        "override_source": null
+      },
+      "static_fields": {},
+      "type": "org.graylog2.inputs.raw.kafka.RawKafkaInput",
+      "global": false,
+      "extractors": [
+        {
+          "title": "JSON extractor",
+          "type": "JSON",
+          "cursor_strategy": "COPY",
+          "target_field": "",
+          "source_field": "message",
+          "configuration": {
+            "list_separator": ", ",
+            "kv_separator": "=",
+            "key_prefix": "",
+            "key_separator": "_",
+            "replace_key_whitespace": false,
+            "key_whitespace_replacement": "_"
+          },
+          "converters": [],
+          "condition_type": "NONE",
+          "condition_value": "",
+          "order": 0
+        }
+      ]
     }
   ],
   "streams": [
@@ -502,429 +638,109 @@
       ],
       "outputs": [],
       "default_stream": false
-    }
+    },
+    {
+       "id": "5bff8d9bf528fb000140922e",
+       "title": "Parse required",
+       "description": "Messages that Logstash does not understand",
+       "disabled": false,
+       "matching_type": "AND",
+       "stream_rules": [
+         {
+           "type": "EXACT",
+           "field": "tags",
+           "value": "_grokparsefailure",
+           "inverted": false,
+           "description": ""
+         }
+       ],
+       "outputs": [],
+       "default_stream": false
+     },
+     {
+       "id": "5c066d15f528fb00014804d5",
+       "title": "Pulp Content Repository",
+       "description": "Messages related to Pulp",
+       "disabled": false,
+       "matching_type": "AND",
+       "stream_rules": [
+         {
+           "type": "CONTAINS",
+           "field": "source",
+           "value": "infa-pulp-t1001.svr.toastmaker.net",
+           "inverted": false,
+           "description": ""
+         },
+         {
+           "type": "EXACT",
+           "field": "program",
+           "value": "pulp",
+           "inverted": false,
+           "description": "Check messages of pulp"
+         }
+       ],
+       "outputs": [],
+       "default_stream": false
+     },
+     {
+       "id": "5c05128ff528fb0001468d30",
+       "title": "VMware ESXi",
+       "description": "VMware ESXi Messages",
+       "disabled": false,
+       "matching_type": "AND",
+       "stream_rules": [
+         {
+           "type": "REGEX",
+           "field": "source",
+           "value": "^(nhevmw|vmwa)-.+\\.svr\\.toastmaker\\.net$",
+           "inverted": false,
+           "description": ""
+         }
+       ],
+       "outputs": [],
+       "default_stream": false
+     },
+     {
+       "id": "5c073781f528fb000148e040",
+       "title": "Fault messages",
+       "description": "Fault messages",
+       "disabled": false,
+       "matching_type": "AND",
+       "stream_rules": [
+         {
+           "type": "REGEX",
+           "field": "syslog_message",
+           "value": "(EDAC|Reset adapter|Cable is unplugged|Unhandled sense code|ip_conntrack: table full, dropping packet|Out of Memory|SCSI hang|SCSI Error|SCSI disk error|I/O error|sense key Hardware Error|IOC is in FAULT state|rejecting I/O to dead device|page allocation failure|Device offlined|xfs_log_force|xfs_do_force_shutdown|delayed block allocation failed|Sense Key : Medium Error|Non-Fatal Error DRAM Controler|Link is Up|Link is Down|Link is up|Link is down|FAIL state entered|EXT2-fs error|EXT3-fs error|EXT4-fs error|Unable to handle kernel|mptscsi: ioc0: attempting task abort|allocation failed: out of vmalloc space|new active one|possible deadlock in kmem_allocr|Detected Hardware Unit Hang|mark as failed|link_down|HP Raid Controller Alert) ",
+           "inverted": false,
+           "description": ""
+         }
+       ],
+       "outputs": [],
+       "default_stream": false
+     },
+     {
+       "id": "5bf77568f528fb000137cd3c",
+       "title": "ToastCloud Controller",
+       "description": "ToastCloud Controller Stream",
+       "disabled": false,
+       "matching_type": "AND",
+       "stream_rules": [
+         {
+           "type": "REGEX",
+           "field": "source",
+           "value": "tnf(alp|stg)-ctl\\d{3}",
+           "inverted": false,
+           "description": "Match Controller's hostname"
+         }
+       ],
+       "outputs": [],
+       "default_stream": false
+     }
   ],
   "outputs": [],
-  "dashboards": [
-    {
-      "title": "iptables packet dropped",
-      "description": "iptables Packet Dropped",
-      "dashboard_widgets": [
-        {
-          "description": "Target Host",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "source",
-            "show_pie_chart": false,
-            "query": "message:\"iptables Packet Dropped\"",
-            "show_data_table": true
-          },
-          "col": 2,
-          "row": 2,
-          "height": 0,
-          "width": 0
-        },
-        {
-          "description": "iptables_src",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "iptables_src",
-            "show_pie_chart": false,
-            "query": "message:\"iptables Packet Dropped\"",
-            "show_data_table": true
-          },
-          "col": 2,
-          "row": 4,
-          "height": 0,
-          "width": 0
-        },
-        {
-          "description": "iptables_dport",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "iptables_dport",
-            "show_pie_chart": false,
-            "query": "message:\"iptables Packet Dropped\"",
-            "show_data_table": true
-          },
-          "col": 1,
-          "row": 4,
-          "height": 0,
-          "width": 0
-        },
-        {
-          "description": "iptables_dst",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "iptables_dst",
-            "show_pie_chart": false,
-            "query": "message:\"iptables Packet Dropped\"",
-            "show_data_table": true
-          },
-          "col": 1,
-          "row": 2,
-          "height": 0,
-          "width": 0
-        },
-        {
-          "description": "iptables Packet Dropped",
-          "type": "SEARCH_RESULT_CHART",
-          "cache_time": 10,
-          "configuration": {
-            "interval": "hour",
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "query": "message:\"iptables Packet Dropped\""
-          },
-          "col": 1,
-          "row": 1,
-          "height": 0,
-          "width": 0
-        }
-      ]
-    },
-    {
-      "title": "Package Management",
-      "description": "Package Management",
-      "dashboard_widgets": [
-        {
-          "description": "Yum pkgs installed.",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "yum_package_installed",
-            "query": "message:\".yum\" AND message:\".Installed\"",
-            "show_data_table": true,
-            "limit": 5,
-            "show_pie_chart": true,
-            "sort_order": "desc",
-            "stacked_fields": "",
-            "data_table_limit": 50
-          },
-          "col": 1,
-          "row": 2,
-          "height": 3,
-          "width": 1
-        },
-        {
-          "description": "Yum pkgs installed by servers.",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "syslog_hostname",
-            "query": "message:\".yum\" AND message:\".Installed\"",
-            "show_data_table": true,
-            "limit": 5,
-            "show_pie_chart": true,
-            "sort_order": "desc",
-            "stacked_fields": "",
-            "data_table_limit": 50
-          },
-          "col": 2,
-          "row": 2,
-          "height": 3,
-          "width": 1
-        },
-        {
-          "description": "Yum packages installed last day.",
-          "type": "FIELD_CHART",
-          "cache_time": 10,
-          "configuration": {
-            "valuetype": "count",
-            "renderer": "line",
-            "interpolation": "linear",
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "rangeType": "relative",
-            "field": "yum_package_installed",
-            "query": "message:\".yum\" AND message:\".Installed\"",
-            "interval": "hour",
-            "relative": 86400
-          },
-          "col": 1,
-          "row": 1,
-          "height": 1,
-          "width": 2
-        },
-        {
-          "description": "Yum pkgs removed.",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "yum_package_removed",
-            "query": "message:\".yum\" AND message:\".Erased\"",
-            "show_data_table": true,
-            "limit": 5,
-            "show_pie_chart": true,
-            "sort_order": "desc",
-            "stacked_fields": "",
-            "data_table_limit": 50
-          },
-          "col": 4,
-          "row": 2,
-          "height": 3,
-          "width": 1
-        },
-        {
-          "description": "Yum pkgs removed by server.",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "syslog_hostname",
-            "query": "message:\".yum\" AND message:\".Erased\"",
-            "show_data_table": true,
-            "limit": 5,
-            "show_pie_chart": true,
-            "sort_order": "desc",
-            "stacked_fields": "",
-            "data_table_limit": 50
-          },
-          "col": 3,
-          "row": 2,
-          "height": 3,
-          "width": 1
-        },
-        {
-          "description": "Yum packages removed last day.",
-          "type": "FIELD_CHART",
-          "cache_time": 10,
-          "configuration": {
-            "valuetype": "count",
-            "renderer": "line",
-            "interpolation": "linear",
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "rangeType": "relative",
-            "field": "yum_package_removed",
-            "query": "message:\".yum\" AND message:\".Erased\"",
-            "interval": "hour",
-            "relative": 86400
-          },
-          "col": 3,
-          "row": 1,
-          "height": 1,
-          "width": 2
-        }
-      ]
-    },
-    {
-      "title": "SSH login/failures",
-      "description": "SSH login/failures",
-      "dashboard_widgets": [
-        {
-          "description": "SSH login",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "syslog_hostname",
-            "show_pie_chart": false,
-            "query": "message:\" Accepted publickey for \" OR message:\" Accepted password for \"",
-            "show_data_table": true
-          },
-          "col": 2,
-          "row": 6,
-          "height": 2,
-          "width": 1
-        },
-        {
-          "description": "ssh_login_username",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "ssh_login_username",
-            "show_pie_chart": false,
-            "query": "message:\" Accepted publickey for \" OR message:\" Accepted password for \"",
-            "show_data_table": true
-          },
-          "col": 3,
-          "row": 5,
-          "height": 2,
-          "width": 1
-        },
-        {
-          "description": "SSH Failure count",
-          "type": "SEARCH_RESULT_COUNT",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "lower_is_better": true,
-            "trend": true,
-            "query": "message:\" Failed publickey for \" OR message:\" Failed password for \" OR (message:\"Invalid user\" AND message:from)"
-          },
-          "col": 1,
-          "row": 1,
-          "height": 1,
-          "width": 1
-        },
-        {
-          "description": "SSH Login failures",
-          "type": "SEARCH_RESULT_CHART",
-          "cache_time": 10,
-          "configuration": {
-            "interval": "hour",
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "query": "message:\" Failed publickey for \" OR message:\" Failed password for \" OR (message:\"Invalid user\" AND message:from)"
-          },
-          "col": 2,
-          "row": 1,
-          "height": 1,
-          "width": 2
-        },
-        {
-          "description": "SSH login failed server",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "syslog_hostname",
-            "show_pie_chart": false,
-            "query": "message:\" Failed publickey for \" OR message:\" Failed password for \" OR (message:\"Invalid user\" AND message:from)",
-            "show_data_table": true
-          },
-          "col": 2,
-          "row": 3,
-          "height": 2,
-          "width": 1
-        },
-        {
-          "description": "Failed SSHD Metrics",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "source",
-            "show_pie_chart": false,
-            "query": "application_name:sshd AND (message:\"Failed\" OR message:\"Invalid user\")",
-            "show_data_table": true
-          },
-          "col": 3,
-          "row": 3,
-          "height": 2,
-          "width": 1
-        },
-        {
-          "description": "SSH Login Failed Source IP",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "IPV4",
-            "show_pie_chart": false,
-            "query": "message:\" Failed publickey for \" OR message:\" Failed password for \" OR (message:\"Invalid user\" AND message:from)",
-            "show_data_table": true
-          },
-          "col": 1,
-          "row": 2,
-          "height": 3,
-          "width": 1
-        },
-        {
-          "description": "Root Login",
-          "type": "QUICKVALUES",
-          "cache_time": 10,
-          "configuration": {
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "field": "IPV4",
-            "show_pie_chart": false,
-            "query": "message:\" Accepted publickey for root \" OR message:\" Accepted password for root \"",
-            "show_data_table": true
-          },
-          "col": 1,
-          "row": 5,
-          "height": 2,
-          "width": 1
-        },
-        {
-          "description": "SSH Connection Dropped",
-          "type": "SEARCH_RESULT_CHART",
-          "cache_time": 10,
-          "configuration": {
-            "interval": "hour",
-            "timerange": {
-              "type": "relative",
-              "range": 86400
-            },
-            "query": "message:\"iptables Packet Dropped\" AND iptables_dport:22"
-          },
-          "col": 2,
-          "row": 2,
-          "height": 1,
-          "width": 2
-        }
-      ]
-    }
-  ],
+  "dashboards": [],
   "grok_patterns": [],
   "lookup_tables": [],
   "lookup_caches": [],
   "lookup_data_adapters": []
 }
-
