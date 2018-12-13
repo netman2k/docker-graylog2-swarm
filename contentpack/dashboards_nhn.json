@@ -1,0 +1,592 @@
+{
+  "name": "NHN/Dashboard v0.1",
+  "description": "NHN/Dashboard v0.1",
+  "category": "NHN",
+  "inputs": [],
+  "streams": [],
+  "outputs": [],
+  "dashboards": [
+    {
+      "title": "Fault Management",
+      "description": "Fault Management",
+      "dashboard_widgets": [
+        {
+          "description": "MCE Memory Error Count in 24h",
+          "type": "STREAM_SEARCH_RESULT_COUNT",
+          "cache_time": 3600,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "lower_is_better": true,
+            "stream_id": "5c073781f528fb000148e040",
+            "trend": true,
+            "query": "syslog_message: HANDLING MCE MEMORY ERROR"
+          },
+          "col": 1,
+          "row": 1,
+          "height": 1,
+          "width": 1
+        },
+        {
+          "description": "Fault Hosts in 24h",
+          "type": "QUICKVALUES",
+          "cache_time": 3600,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "source",
+            "stream_id": "5c073781f528fb000148e040",
+            "query": "syslog_message: HANDLING MCE MEMORY ERROR",
+            "show_data_table": true,
+            "limit": 10,
+            "show_pie_chart": false,
+            "sort_order": "desc",
+            "stacked_fields": "",
+            "data_table_limit": 50
+          },
+          "col": 1,
+          "row": 2,
+          "height": 2,
+          "width": 1
+        }
+      ]
+    },
+    {
+      "title": "VMware Management",
+      "description": "VMware Management",
+      "dashboard_widgets": [
+        {
+          "description": "vCenter 에이전트 로그 레벨",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 1800
+            },
+            "field": "syslog_level",
+            "query": "program: Vpxa",
+            "show_data_table": true,
+            "limit": 5,
+            "show_pie_chart": true,
+            "sort_order": "desc",
+            "stacked_fields": "",
+            "data_table_limit": 50
+          },
+          "col": 2,
+          "row": 1,
+          "height": 3,
+          "width": 1
+        },
+        {
+          "description": "ESXi 호스트 에이전트 로그 레벨",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 1800
+            },
+            "field": "syslog_level",
+            "query": "program: Hostd",
+            "show_data_table": true,
+            "limit": 5,
+            "show_pie_chart": true,
+            "sort_order": "desc",
+            "stacked_fields": "",
+            "data_table_limit": 50
+          },
+          "col": 0,
+          "row": 0,
+          "height": 0,
+          "width": 0
+        }
+      ]
+    },
+    {
+      "title": "Repository Management",
+      "description": "Repository Management",
+      "dashboard_widgets": [
+        {
+          "description": "Message Counter",
+          "type": "STREAM_SEARCH_RESULT_COUNT",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 28800
+            },
+            "lower_is_better": false,
+            "stream_id": "5c066d15f528fb00014804d5",
+            "trend": true,
+            "query": ""
+          },
+          "col": 0,
+          "row": 0,
+          "height": 0,
+          "width": 0
+        }
+      ]
+    },
+    {
+      "title": "iptables packet dropped",
+      "description": "iptables Packet Dropped",
+      "dashboard_widgets": [
+        {
+          "description": "Target Host",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "source",
+            "show_pie_chart": false,
+            "query": "message:\"iptables Packet Dropped\"",
+            "show_data_table": true
+          },
+          "col": 2,
+          "row": 2,
+          "height": 0,
+          "width": 0
+        },
+        {
+          "description": "iptables_src",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "iptables_src",
+            "show_pie_chart": false,
+            "query": "message:\"iptables Packet Dropped\"",
+            "show_data_table": true
+          },
+          "col": 2,
+          "row": 4,
+          "height": 0,
+          "width": 0
+        },
+        {
+          "description": "iptables_dport",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "iptables_dport",
+            "show_pie_chart": false,
+            "query": "message:\"iptables Packet Dropped\"",
+            "show_data_table": true
+          },
+          "col": 1,
+          "row": 4,
+          "height": 0,
+          "width": 0
+        },
+        {
+          "description": "iptables_dst",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "iptables_dst",
+            "show_pie_chart": false,
+            "query": "message:\"iptables Packet Dropped\"",
+            "show_data_table": true
+          },
+          "col": 1,
+          "row": 2,
+          "height": 0,
+          "width": 0
+        },
+        {
+          "description": "iptables Packet Dropped",
+          "type": "SEARCH_RESULT_CHART",
+          "cache_time": 10,
+          "configuration": {
+            "interval": "hour",
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "query": "message:\"iptables Packet Dropped\""
+          },
+          "col": 1,
+          "row": 1,
+          "height": 0,
+          "width": 0
+        }
+      ]
+    },
+    {
+      "title": "Package Management",
+      "description": "Package Management",
+      "dashboard_widgets": [
+        {
+          "description": "Yum pkgs installed.",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "yum_package_installed",
+            "query": "message:\".yum\" AND message:\".Installed\"",
+            "show_data_table": true,
+            "limit": 5,
+            "show_pie_chart": true,
+            "sort_order": "desc",
+            "stacked_fields": "",
+            "data_table_limit": 50
+          },
+          "col": 1,
+          "row": 2,
+          "height": 3,
+          "width": 1
+        },
+        {
+          "description": "Yum pkgs installed by servers.",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "source",
+            "query": "message:\".yum\" AND message:\".Installed\"",
+            "show_data_table": true,
+            "limit": 5,
+            "show_pie_chart": true,
+            "sort_order": "desc",
+            "stacked_fields": "",
+            "data_table_limit": 50
+          },
+          "col": 2,
+          "row": 2,
+          "height": 3,
+          "width": 1
+        },
+        {
+          "description": "Yum packages installed last day.",
+          "type": "FIELD_CHART",
+          "cache_time": 10,
+          "configuration": {
+            "valuetype": "count",
+            "renderer": "line",
+            "interpolation": "linear",
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "rangeType": "relative",
+            "field": "yum_package_installed",
+            "query": "message:\".yum\" AND message:\".Installed\"",
+            "interval": "hour",
+            "relative": 86400
+          },
+          "col": 1,
+          "row": 1,
+          "height": 1,
+          "width": 2
+        },
+        {
+          "description": "Yum pkgs removed.",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "yum_package_removed",
+            "query": "message:\".yum\" AND message:\".Erased\"",
+            "show_data_table": true,
+            "limit": 5,
+            "show_pie_chart": true,
+            "sort_order": "desc",
+            "stacked_fields": "",
+            "data_table_limit": 50
+          },
+          "col": 4,
+          "row": 2,
+          "height": 3,
+          "width": 1
+        },
+        {
+          "description": "Yum pkgs removed by server.",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "source",
+            "query": "message:\".yum\" AND message:\".Erased\"",
+            "show_data_table": true,
+            "limit": 5,
+            "show_pie_chart": true,
+            "sort_order": "desc",
+            "stacked_fields": "",
+            "data_table_limit": 50
+          },
+          "col": 3,
+          "row": 2,
+          "height": 3,
+          "width": 1
+        },
+        {
+          "description": "Yum packages removed last day.",
+          "type": "FIELD_CHART",
+          "cache_time": 10,
+          "configuration": {
+            "valuetype": "count",
+            "renderer": "line",
+            "interpolation": "linear",
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "rangeType": "relative",
+            "field": "yum_package_removed",
+            "query": "message:\".yum\" AND message:\".Erased\"",
+            "interval": "hour",
+            "relative": 86400
+          },
+          "col": 3,
+          "row": 1,
+          "height": 1,
+          "width": 2
+        }
+      ]
+    },
+    {
+      "title": "SSH login/failures",
+      "description": "SSH login/failures",
+      "dashboard_widgets": [
+        {
+          "description": "SSH login",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "source",
+            "show_pie_chart": false,
+            "query": "message:\" Accepted publickey for \" OR message:\" Accepted password for \"",
+            "show_data_table": true
+          },
+          "col": 2,
+          "row": 6,
+          "height": 2,
+          "width": 1
+        },
+        {
+          "description": "ssh_login_username",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "ssh_login_username",
+            "show_pie_chart": false,
+            "query": "message:\" Accepted publickey for \" OR message:\" Accepted password for \"",
+            "show_data_table": true
+          },
+          "col": 3,
+          "row": 5,
+          "height": 2,
+          "width": 1
+        },
+        {
+          "description": "SSH Failure count",
+          "type": "SEARCH_RESULT_COUNT",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "lower_is_better": true,
+            "trend": true,
+            "query": "message:\" Failed publickey for \" OR message:\" Failed password for \" OR (message:\"Invalid user\" AND message:from)"
+          },
+          "col": 1,
+          "row": 1,
+          "height": 1,
+          "width": 1
+        },
+        {
+          "description": "SSH Login failures",
+          "type": "SEARCH_RESULT_CHART",
+          "cache_time": 10,
+          "configuration": {
+            "interval": "hour",
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "query": "message:\" Failed publickey for \" OR message:\" Failed password for \" OR (message:\"Invalid user\" AND message:from)"
+          },
+          "col": 2,
+          "row": 1,
+          "height": 1,
+          "width": 2
+        },
+        {
+          "description": "SSH login failed server",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "source",
+            "show_pie_chart": false,
+            "query": "message:\" Failed publickey for \" OR message:\" Failed password for \" OR (message:\"Invalid user\" AND message:from)",
+            "show_data_table": true
+          },
+          "col": 2,
+          "row": 3,
+          "height": 2,
+          "width": 1
+        },
+        {
+          "description": "Failed SSHD Metrics",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "source",
+            "show_pie_chart": false,
+            "query": "application_name:sshd AND (message:\"Failed\" OR message:\"Invalid user\")",
+            "show_data_table": true
+          },
+          "col": 3,
+          "row": 3,
+          "height": 2,
+          "width": 1
+        },
+        {
+          "description": "SSH Login Failed Source IP",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "IPV4",
+            "show_pie_chart": false,
+            "query": "message:\" Failed publickey for \" OR message:\" Failed password for \" OR (message:\"Invalid user\" AND message:from)",
+            "show_data_table": true
+          },
+          "col": 1,
+          "row": 2,
+          "height": 3,
+          "width": 1
+        },
+        {
+          "description": "Root Login",
+          "type": "QUICKVALUES",
+          "cache_time": 10,
+          "configuration": {
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "field": "IPV4",
+            "show_pie_chart": false,
+            "query": "message:\" Accepted publickey for root \" OR message:\" Accepted password for root \"",
+            "show_data_table": true
+          },
+          "col": 1,
+          "row": 5,
+          "height": 2,
+          "width": 1
+        },
+        {
+          "description": "SSH Connection Dropped",
+          "type": "SEARCH_RESULT_CHART",
+          "cache_time": 10,
+          "configuration": {
+            "interval": "hour",
+            "timerange": {
+              "type": "relative",
+              "range": 86400
+            },
+            "query": "message:\"iptables Packet Dropped\" AND iptables_dport:22"
+          },
+          "col": 2,
+          "row": 2,
+          "height": 1,
+          "width": 2
+        }
+      ]
+    }
+  ],
+  "grok_patterns": [
+    {
+      "name": "CRON_ACTION",
+      "pattern": "[A-Z ]+"
+    },
+    {
+      "name": "CRONLOG",
+      "pattern": "%{SYSLOGBASE} \\(%{USER:user}\\) %{CRON_ACTION:action} \\(%{DATA:message}\\)"
+    },
+    {
+      "name": "SYSLOGLINE",
+      "pattern": "%{SYSLOGBASE2} %{GREEDYDATA:message}"
+    },
+    {
+      "name": "SYSLOGBASE2",
+      "pattern": "(?:%{SYSLOGTIMESTAMP:timestamp}|%{TIMESTAMP_ISO8601:timestamp8601}) (?:%{SYSLOGFACILITY} )?%{SYSLOGHOST:logsource} %{SYSLOGPROG}:"
+    },
+    {
+      "name": "SYSLOG5424PRI",
+      "pattern": "<%{NONNEGINT:priority}>"
+    },
+    {
+      "name": "SYSLOG5424BASE",
+      "pattern": "%{SYSLOG5424PRI}%{NONNEGINT:version} +(?:%{TIMESTAMP_ISO8601:timestamp8601}|-) +(?:%{SYSLOGHOST:logsource}|-) +(?:%{WORD:program}|-) +(?:%{WORD:pid}|-) +(?:%{WORD:message_id}|-) +(?:%{SYSLOG5424SD:structured_data}|-|)"
+    },
+    {
+      "name": "SYSLOG5424LINE",
+      "pattern": "%{SYSLOG5424BASE}+%{GREEDYDATA:message}"
+    },
+    {
+      "name": "SYSLOG5424SD",
+      "pattern": "\\[%{DATA}\\]+"
+    },
+    {
+      "name": "SYSLOGPAMSESSION",
+      "pattern": "%{SYSLOGBASE} (?=%{GREEDYDATA:message})%{WORD:pam_module}\\(%{DATA:pam_caller}\\): session %{WORD:pam_session_state} for user %{USERNAME:username}(?: by %{GREEDYDATA:pam_by})?"
+    }
+  ],
+  "lookup_tables": [],
+  "lookup_caches": [],
+  "lookup_data_adapters": []
+}
